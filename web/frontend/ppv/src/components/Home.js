@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import checkWalletIsConnected from "../wallet/IfConnected";
 import MarketplaceAddress from "../contractAddress.json";
 import MarketplaceAbi from "../artifacts/contracts/dMarket.sol/DOTT.json";
+
 function Home() {
   const [currentAccount, setCurrentAccount] = useState(null);
   const [provider, setProvider] = useState(null);
@@ -19,10 +20,10 @@ function Home() {
     // const provider = new ethers.providers.Web3Provider(window.ethereumm, "any");
     setProvider(provider);
     const signer = provider.getSigner();
-    await loadContracts(signer, 0);
+    await loadContracts(signer, 0, provider);
   };
 
-  const loadContracts = async (signer, block) => {
+  const loadContracts = async (signer, block, provider) => {
     console.log("loaded contracts");
     const marketplace = new ethers.Contract(
       MarketplaceAddress.address,
@@ -30,6 +31,22 @@ function Home() {
       signer
     );
     console.log(marketplace);
+
+    // filtering events
+    var data = marketplace.filters.Log(null, null, null, null, null)
+    const current_block = await provider.getBlockNumber()
+    const results = await marketplace.queryFilter(data, current_block - 10000)
+
+    console.log(results)
+
+    const purchases = await Promise.all(results.map(async i => {
+      // fetch arguments from each result
+      i = i.args
+      console.log(i)
+      return i
+    }))
+    console.log(purchases)
+
   };
 
   useEffect(() => {
