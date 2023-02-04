@@ -71,10 +71,10 @@ function DragDropFile() {
 
       <input ref={inputRef} type="file" id="input-file-upload" multiple={true} onChange={handleChange} />
       <label id="label-file-upload" htmlFor="input-file-upload" className={dragActive ? "drag-active" : "" }>
-        <div>
+        {/* <div> */}
           <p>Drag and drop your file here or</p>
           <button className="upload-button" onClick={onButtonClick}>Upload a file</button>
-        </div> 
+        {/* </div>  */}
       </label>
       { dragActive && <div id="drag-file-element" onDragEnter={handleDrag} onDragLeave={handleDrag} onDragOver={handleDrag} onDrop={handleDrop}></div> }
 
@@ -87,7 +87,7 @@ function DragDropFile() {
 // app component
 function DragDrop() {
   return (
-    <div className="dd"><h1>Upload Video</h1>
+    <div className="dd" style={{display:"block"}}><h1>Upload Video</h1>
     <div className="page">
       <DragDropFile />
       </div>

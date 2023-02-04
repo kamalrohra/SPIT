@@ -2,12 +2,16 @@ import React from "react";
 import "../styles/Videos.css"
 import Filter from "./Filter";
 import SingleVideo from "./SingleVideo";
+import { Typography } from "@mui/material";
 
 function Videos() {
     return (
         <div className="videos">
-            <Filter />
-            <br/><br/>
+            {/* <Filter /> */}
+            <Typography variant="h5" fontWeight= 'bold' marginTop="15px" marginLeft="10px">
+            Videos For You
+            </Typography>
+            
             <div className="row">
                 <SingleVideo 
                 thumb_img="https://i.ytimg.com/vi/78uSkHH42IU/hq720.jpg?sqp=-oaymwEcCNAFEJQDSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLCSUsgncPb84K_zEOdU_VzC1bkfjA" 

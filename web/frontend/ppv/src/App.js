@@ -6,9 +6,11 @@ import Player from "./components/Player";
 import PlayerPage from "./components/PlayerPage";
 import Home from "./components/Home";
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
-import Profile from "./components/Profile";
+// import Profile from "./components/Profile";
 import Register from "./components/Register";
 import ChannelDetail from "./components/Channel";
+import App2 from "./landing/App2";
+
 function App() {
   return (
     <Router>
@@ -26,6 +28,8 @@ function App() {
           <Route exact path="/" element={<Home />}></Route>
           <Route exact path="/video/:id" element={<PlayerPage />}></Route>
           <Route exact path="/channel" element={<ChannelDetail />}></Route>
+          {/* <Route exact path="landing" element={<Mainpage/>}></Route> */}
+          <Route exact path="landing2" element={<App2/>}></Route>
 
         </Routes>
         {/* <Profile/> */}

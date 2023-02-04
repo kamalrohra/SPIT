@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import checkWalletIsConnected from "../wallet/IfConnected";
 import MarketplaceAddress from "../contractAddress.json";
 import MarketplaceAbi from "../artifacts/contracts/dMarket.sol/DOTT.json";
+import Banner from "./Banner";
 function Home() {
   const [currentAccount, setCurrentAccount] = useState(null);
   const [provider, setProvider] = useState(null);
@@ -98,6 +99,9 @@ function Home() {
     <div className="Home">
       <Header account={currentAccount} />
       <br />
+      <div style={{marginBottom:"20px"}}>
+      <Banner/>
+      </div>
       <div className="main-display" style={{ display: "flex", justifyContent: "space-around" }}>
         {/* <Sidebar /> */}
         <Videos />
