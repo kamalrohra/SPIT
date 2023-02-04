@@ -1,17 +1,17 @@
 // import './App.css';
 import Header from './Header';
-import Sidebar from './Sidebar';
+// import Sidebar from './Sidebar';
 import Player from './Player';
 function PlayerPage() {
   return (
     <div className="App">
-      <Header/>
-      <br/>
-      <div className="main-display" style={{"display" : "flex"}}>
-      <Sidebar/>
-      <Player/>
+      <Header />
+      <br />
+      <div className="main-display" style={{ display: "flex", justifyContent: "space around" }}>
+        {/* <Sidebar/> */}
+        <Player />
       </div>
-  </div> 
+    </div>
   );
 }
 
