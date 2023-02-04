@@ -6,10 +6,12 @@ import Player from './components/Player';
 import PlayerPage from './components/PlayerPage';
 import Home from './components/Home';
 import { BrowserRouter as Router,Routes, Route, Link } from 'react-router-dom';
+import Profile from './components/profile';
+import Register from './components/Register';
 
 function App() {
   return (
-    <Router>
+    // <Router>
     <div className="App">
      {/* <ul className="App-header">
        <li>
@@ -20,12 +22,14 @@ function App() {
        </li>
      </ul> */}
      
-    <Routes>
+    {/* <Routes>
           <Route exact path='/' element={< Home />}></Route>
           <Route exact path='/video' element={< PlayerPage />}></Route>
-   </Routes>
-   </div>
-</Router>
+    </Routes> */}
+    {/* <Profile/> */}
+    <Register/>
+    </div>
+    // </Router>
   );
 }
 
