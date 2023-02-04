@@ -6,9 +6,9 @@ const Player = () => {
     return (
         <div>
     <ReactPlayer
-    url="cssia2.mp4"
-    width="50%"
-    height="50%"
+    url="https://www.youtube.com/watch?v=y-WHM4IKnts"
+    width="100%"
+    height="100%"
     controls
     />
     {/* <ReactPlayer url='https://www.youtube.com/watch?v=y-WHM4IKnts' /> */}

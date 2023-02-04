@@ -6,16 +6,23 @@ import Player from './components/Player';
 import Register from './components/Register';
 function App() {
   return (
+    <Router>
     <div className="App">
-      <Header/>
-      <br/>
-      <div className="main-display" style={{"display" : "flex"}}>
-      <Sidebar/>
-      <Register/>
-      </div>
-      {/* <Register/> */}
-      {/* <Player/> */}
-  </div> 
+     {/* <ul className="App-header">
+       <li>
+         <Link to="/">Home</Link>
+       </li>
+       <li>
+         <Link to="/video">PlayerPage</Link>
+       </li>
+     </ul> */}
+     
+    <Routes>
+          <Route exact path='/' element={< Home />}></Route>
+          <Route exact path='/video' element={< PlayerPage />}></Route>
+   </Routes>
+   </div>
+</Router>
   );
 }
 
