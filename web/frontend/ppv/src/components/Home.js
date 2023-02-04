@@ -1,5 +1,5 @@
 import Header from "./Header";
-import Sidebar from "./Sidebar";
+// import Sidebar from "./Sidebar";
 import Videos from "./Videos";
 import { ethers } from "ethers";
 import { useEffect, useState } from "react";
@@ -102,7 +102,6 @@ function Home() {
       <Header contract={contract} account={currentAccount} />
       <br />
       <div className="main-display" style={{ display: "flex" }}>
-        <Sidebar />
         <Videos
           contract={contract}
           setAccounts={setAccounts}

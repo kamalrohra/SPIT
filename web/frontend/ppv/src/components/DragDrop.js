@@ -75,7 +75,12 @@ function DragDropFile({ contract }) {
       });
       const ImgHash = `https://gateway.pinata.cloud/ipfs/${resFile.data.IpfsHash}`;
       console.log(ImgHash);
-      const data = await contract.addVideo(titile, description, ImgHash, price);
+      const data = await contract.addVideo(
+        titile,
+        description,
+        ImgHash,
+        parseInt(price)
+      );
       console.log(data);
     } catch (error) {
       console.log(error);

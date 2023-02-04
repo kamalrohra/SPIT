@@ -1,6 +1,8 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.3;
 import "@openzeppelin/contracts/token/ERC721/extensions/ERC721URIStorage.sol";
+import "@openzeppelin/contracts/utils/Strings.sol";
+
 
 contract DOTT is ERC721URIStorage {
     address payable public owner;
@@ -9,6 +11,8 @@ contract DOTT is ERC721URIStorage {
 
     mapping(address => User) public userMappings;
     mapping(uint256 => Video) public videoMappings;
+
+    event Log(uint256 time, address indexed from, address indexed to, string indexed video, uint256 price);
 
     struct User {
         string username;
@@ -20,7 +24,8 @@ contract DOTT is ERC721URIStorage {
 
     struct Video {
         address owner;
-        string metadata;
+        string name;
+        string description;
         uint256 viewCount;
         string link;
         uint256 price;
@@ -58,18 +63,20 @@ contract DOTT is ERC721URIStorage {
     }
 
     function addVideo(
-        string memory metadata,
+        string memory name,
+        string memory description,
         string memory link,
         uint256 price
     ) public {
         uint256 id = increaseVideoCounter();
-        videoMappings[id] = Video(msg.sender, metadata, 0, link, price);
+        videoMappings[id] = Video(msg.sender, name, description, 0, link, price);
     }
 
     function updateVideo(
         uint256 id,
         uint256 price,
-        string memory metadata
+        string memory name, 
+        string memory description
     ) public {
         require(
             videoMappings[id].owner == msg.sender,
@@ -79,7 +86,8 @@ contract DOTT is ERC721URIStorage {
             videoMappings[id].owner != address(0), 
             "Video does not exist"
         );
-        videoMappings[id].metadata = metadata;
+        videoMappings[id].name = name;
+        videoMappings[id].description = description;
         videoMappings[id].price = price;
     }
 
@@ -100,6 +108,9 @@ contract DOTT is ERC721URIStorage {
     {
         userMappings[msg.sender].viewedVideos = viewedVideos;
         videoMappings[videoId].viewCount++;
+        string memory video_name_id = string.concat(videoMappings[videoId].name, Strings.toString(videoId));
+
+        emit Log(block.timestamp, msg.sender, videoMappings[videoId].owner, video_name_id, videoMappings[videoId].price);
     }
 
     function sayHello() public pure returns (string memory) {
