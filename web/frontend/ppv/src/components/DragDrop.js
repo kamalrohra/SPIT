@@ -1,5 +1,7 @@
 import React from "react";
 import "../styles/DragDrop.css";
+import TextField from '@mui/material/TextField';
+import Button from '@mui/material/Button';
 
 function handleFile(files) {
   alert("Number of files: " + files.length);
@@ -49,6 +51,24 @@ function DragDropFile() {
   
   return (
     <form id="form-file-upload" onDragEnter={handleDrag} onSubmit={(e) => e.preventDefault()}>
+
+        <div className="textbox">
+        <TextField
+          id="outlined"
+          label="Video Title"
+        />
+        </div>
+        <br/>
+        <div>
+        <TextField className="textbox"
+        id="outlined-multiline-flexible"
+        label="Video Description"
+        multiline
+        maxRows={4}
+         />
+        </div>
+         <br/>
+
       <input ref={inputRef} type="file" id="input-file-upload" multiple={true} onChange={handleChange} />
       <label id="label-file-upload" htmlFor="input-file-upload" className={dragActive ? "drag-active" : "" }>
         <div>
@@ -57,6 +77,9 @@ function DragDropFile() {
         </div> 
       </label>
       { dragActive && <div id="drag-file-element" onDragEnter={handleDrag} onDragLeave={handleDrag} onDragOver={handleDrag} onDrop={handleDrop}></div> }
+
+      <Button>Submit</Button>
+
     </form>
   );
 };
@@ -64,9 +87,10 @@ function DragDropFile() {
 // app component
 function DragDrop() {
   return (
+    <div className="dd"><h1>Upload Video</h1>
     <div className="page">
-      <h1>React Drag & Drop</h1>
       <DragDropFile />
+      </div>
      </div>
     )
 }

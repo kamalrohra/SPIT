@@ -13,7 +13,6 @@ const style = {
   width: 800,
   height: 700,
   bgcolor: 'background.paper',
-  border: '2px solid #000',
   boxShadow: 24,
   p: 4,
 };
@@ -26,7 +25,6 @@ export default function DropModal() {
   return (
     <div>
       <Button onClick={handleOpen}>
-        {/* <img src="https://www.tenforums.com/geek/gars/images/2/types/thumb_14486407500Folder.png" width="100" alt="folder"/> */}
         <div className="create-options">
           <svg
             viewBox="0 0 24 24"
@@ -44,6 +42,7 @@ export default function DropModal() {
           </svg>
         </div>
         </Button>
+
       <Modal
         open={open}
         onClose={handleClose}
@@ -54,6 +53,7 @@ export default function DropModal() {
           <DragDrop/>
         </Box>
       </Modal>
+
     </div>
   );
 }
