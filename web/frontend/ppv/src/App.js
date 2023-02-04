@@ -1,9 +1,8 @@
-import logo from './logo.svg';
 import './App.css';
 import Header from './components/Header';
 import Sidebar from './components/Sidebar';
 import Videos from './components/Videos';
-import DragDrop from './components/DragDrop';
+import Player from './components/Player';
 function App() {
   return (
     <div className="App">
@@ -13,6 +12,7 @@ function App() {
       <Sidebar/>
        <Videos/>
       </div>
+      <Player/>
     </div>
   );
 }
