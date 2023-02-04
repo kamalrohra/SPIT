@@ -1,18 +1,20 @@
-// import './App.css';
+// import './Home.css';
 import Header from './Header';
 import Sidebar from './Sidebar';
-import Player from './Player';
-function PlayerPage() {
+import Videos from './Videos';
+
+function Home() {
   return (
-    <div className="App">
+    <div className="Home">
       <Header/>
       <br/>
       <div className="main-display" style={{"display" : "flex"}}>
       <Sidebar/>
-      <Player/>
+       <Videos/>
       </div>
+      {/* <Player/> */}
   </div> 
   );
 }
 
-export default PlayerPage;
+export default Home;
