@@ -1,6 +1,9 @@
 import React from "react";
 import "../styles/Header.css";
 import DropModal from "./DragModal";
+import connectWalletHandler from "../wallet/ConnectWallet";
+import { Button } from "@mui/material";
+
 function Header() {
   return (
     <div className="header d-flex align-items-center justify-content-space-between">
@@ -142,6 +145,7 @@ function Header() {
             </g>
           </svg>
         </div>
+        <Button>
         <div className="profile-menu">
           <div className="profile-img">
             <img
@@ -151,6 +155,7 @@ function Header() {
             />
           </div>
         </div>
+        </Button>
       </div>
     </div>
   );
