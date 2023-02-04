@@ -6,7 +6,8 @@ import Player from './components/Player';
 import PlayerPage from './components/PlayerPage';
 import Home from './components/Home';
 import { BrowserRouter as Router,Routes, Route, Link } from 'react-router-dom';
-
+import Profile from './components/Profile';
+import ChannelDetail from './components/Channel';
 function App() {
   return (
     <Router>
@@ -23,6 +24,8 @@ function App() {
     <Routes>
           <Route exact path='/' element={< Home />}></Route>
           <Route exact path='/video' element={< PlayerPage />}></Route>
+          <Route exact path='/channel' element={< ChannelDetail />}></Route>
+
    </Routes>
    </div>
 </Router>
