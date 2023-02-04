@@ -1,6 +1,7 @@
 import React from "react";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import PaidIcon from "@mui/icons-material/Paid";
+import { useNavigate } from "react-router-dom";
 
 function SingleVideo({
   thumb_img,
@@ -11,10 +12,31 @@ function SingleVideo({
   timestamps,
   video_duration,
   price,
+  id,
+  setAccounts,
+  accounts,
+  contract,
 }) {
-  const onClick = (e) => {
-    console.log(e);
+  const navigate = useNavigate();
+  const onClick = async (e) => {
+    // console.log(e);
     //if not connected to metamask then connect
+    if (!accounts) {
+      const accounts = await window.ethereum.request({
+        method: "eth_requestAccounts",
+      });
+      console.log("these are the accounts");
+
+      setAccounts(accounts[0]);
+      // navigate(`/video/${id}`);
+    } else {
+      const details = await contract.getVideoOwnerAndPrice(3);
+
+      console.log(details[0], details[1]);
+      // navigate(`/video/${id}`);
+    }
+
+    //if payed
   };
   return (
     <div className="col-3">

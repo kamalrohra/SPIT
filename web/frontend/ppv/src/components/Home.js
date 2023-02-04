@@ -9,12 +9,12 @@ import MarketplaceAbi from "../artifacts/contracts/dMarket.sol/DOTT.json";
 function Home() {
   const [currentAccount, setCurrentAccount] = useState(null);
   const [provider, setProvider] = useState(null);
+  const [accounts, setAccounts] = useState(null);
+  const [contract, setContract] = useState(null);
 
   const initWeb3 = async () => {
     console.log("Running web3");
-    const accounts = await window.ethereum.request({
-      method: "eth_requestAccounts",
-    });
+
     const provider = new ethers.providers.Web3Provider(window.ethereum);
     // const provider = new ethers.providers.Web3Provider(window.ethereumm, "any");
     setProvider(provider);
@@ -29,7 +29,10 @@ function Home() {
       MarketplaceAbi.abi,
       signer
     );
+    setContract(marketplace);
     console.log(marketplace);
+    const data = await marketplace.sayHello();
+    console.log(data);
   };
 
   useEffect(() => {
@@ -96,11 +99,15 @@ function Home() {
 
   return (
     <div className="Home">
-      <Header account={currentAccount} />
+      <Header contract={contract} account={currentAccount} />
       <br />
       <div className="main-display" style={{ display: "flex" }}>
         <Sidebar />
-        <Videos />
+        <Videos
+          contract={contract}
+          setAccounts={setAccounts}
+          accounts={accounts}
+        />
       </div>
       {/* <Player/> */}
     </div>
