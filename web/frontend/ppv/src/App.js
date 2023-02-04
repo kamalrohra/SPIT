@@ -1,14 +1,18 @@
 import logo from './logo.svg';
 import './App.css';
-import VideoDetail from './components/VideoDetail';
+import Header from './components/Header';
+import Sidebar from './components/Sidebar';
+import Videos from './components/Videos';
 
 function App() {
   return (
     <div className="App">
-      <VideoDetail/>
-
-
-
+      <Header/>
+      <br/>
+      <div className="main-display" style={{"display" : "flex"}}>
+      <Sidebar/>
+       <Videos/>
+      </div>
     </div>
   );
 }
