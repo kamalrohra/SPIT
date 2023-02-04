@@ -3,16 +3,18 @@ import Header from './components/Header';
 import Sidebar from './components/Sidebar';
 import Videos from './components/Videos';
 import Player from './components/Player';
+import Register from './components/Register';
 function App() {
   return (
     <div className="App">
       <Header/>
       <br/>
-      {/* <div className="main-display" style={{"display" : "flex"}}>
+      <div className="main-display" style={{"display" : "flex"}}>
       <Sidebar/>
-       <Videos/>
+      <Register/>
       </div>
-      <Player/> */}
+      {/* <Register/> */}
+      {/* <Player/> */}
   </div> 
   );
 }
