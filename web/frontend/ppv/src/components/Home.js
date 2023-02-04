@@ -16,9 +16,25 @@ function Home() {
     console.log("Running web3");
 
     const provider = new ethers.providers.Web3Provider(window.ethereum);
+
     // const provider = new ethers.providers.Web3Provider(window.ethereumm, "any");
     setProvider(provider);
     const signer = provider.getSigner();
+    // const tx = {
+    //   from: "0xa491637217782Ed121B78f333ae16aD94fC4f197",
+    //   to: "0x611E72c39419168FfF07F068E76a077588225798",
+    //   value: ethers.utils.parseEther("0.00005"),
+    //   nonce: await provider.getTransactionCount(
+    //     "0xa491637217782Ed121B78f333ae16aD94fC4f197",
+    //     "latest"
+    //   ),
+    //   gasLimit: ethers.utils.hexlify(1000000),
+    //   gasPrice: ethers.utils.hexlify(parseInt(await provider.getGasPrice())),
+    // };
+    // signer.sendTransaction(tx).then((transaction) => {
+    //   console.dir(transaction);
+    //   alert("Send finished!");
+    // });
     await loadContracts(signer, 0);
   };
 
@@ -101,7 +117,9 @@ function Home() {
     <div className="Home">
       <Header contract={contract} account={currentAccount} />
       <br />
-      <div className="main-display" style={{ display: "flex" }}>
+      <div
+        className="main-display"
+        style={{ display: "flex", justifyContent: "center" }}>
         <Videos
           contract={contract}
           setAccounts={setAccounts}
