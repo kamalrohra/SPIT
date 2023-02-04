@@ -2,7 +2,7 @@
 pragma solidity ^0.8.3;
 import "@openzeppelin/contracts/token/ERC721/extensions/ERC721URIStorage.sol";
 
-contract medBlocks is ERC721URIStorage {
+contract DOTT is ERC721URIStorage {
     address payable public owner;
     uint256 private counter = 0;
     uint256 private videoCounter = 0;
@@ -13,8 +13,8 @@ contract medBlocks is ERC721URIStorage {
     }
 
     function increaseVideoCounter() public returns (uint256) {
-        counter++;
-        return counter;
+        videoCounter++;
+        return videoCounter;
     }
 
     struct User {
@@ -77,6 +77,10 @@ contract medBlocks is ERC721URIStorage {
             videoMappings[id].owner == msg.sender,
             "You are not authorized"
         );
+        require(
+            videoMappings[id].owner != address(0), 
+            "Video does not exist"
+        );
         videoMappings[id].metadata = metadata;
         videoMappings[id].price = price;
     }
@@ -89,8 +93,7 @@ contract medBlocks is ERC721URIStorage {
         return (videoMappings[id].owner, videoMappings[id].price);
     }
 
-    function updateViewedVideos(string memory viewedVideos, uint256 videoId)
-        internal
+    function updateViewedVideos(string memory viewedVideos, uint256 videoId) public
     {
         userMappings[msg.sender].viewedVideos = viewedVideos;
         videoMappings[videoId].viewCount++;
@@ -100,7 +103,7 @@ contract medBlocks is ERC721URIStorage {
         return "Hello there";
     }
 
-    constructor() ERC721("medBlocks", "MBLKS") {
+    constructor() ERC721("DOTT", "DOTT") {
         owner = payable(msg.sender);
     }
 }
