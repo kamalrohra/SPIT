@@ -68,7 +68,7 @@ function Home() {
 
   return (
     <div className="Home">
-      <Header/>
+      <Header account={currentAccount}/>
       <br/>
       <div className="main-display" style={{"display" : "flex"}}>
       <Sidebar/>
