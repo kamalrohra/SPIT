@@ -7,15 +7,8 @@ contract DOTT is ERC721URIStorage {
     uint256 private counter = 0;
     uint256 private videoCounter = 0;
 
-    function increaseUserCounter() public returns (uint256) {
-        counter++;
-        return counter;
-    }
-
-    function increaseVideoCounter() public returns (uint256) {
-        videoCounter++;
-        return videoCounter;
-    }
+    mapping(address => User) public userMappings;
+    mapping(uint256 => Video) public videoMappings;
 
     struct User {
         string username;
@@ -32,18 +25,21 @@ contract DOTT is ERC721URIStorage {
         string link;
         uint256 price;
     }
-    mapping(address => User) public userMappings;
-    mapping(uint256 => Video) public videoMappings;
 
-    function registerUser(string memory username, string memory bio) public {
-        uint256 id = increaseUserCounter();
-
-        userMappings[msg.sender] = User(username, bio, id, "", "");
+    function increaseUserCounter() public returns (uint256) {
+        counter++;
+        return counter;
     }
 
-    function deleteVideo(uint256 id, string memory postedVideos) public {
-        userMappings[msg.sender].postedVideos = postedVideos;
-        delete videoMappings[id];
+    function increaseVideoCounter() public returns (uint256) {
+        videoCounter++;
+        return videoCounter;
+    }
+
+    // user functions
+    function registerUser(string memory username, string memory bio) public {
+        uint256 id = increaseUserCounter();
+        userMappings[msg.sender] = User(username, bio, id, "", "");
     }
 
     function updateUser(string memory username, string memory bio) public {
@@ -55,6 +51,8 @@ contract DOTT is ERC721URIStorage {
         return userMappings[wallet];
     }
 
+
+    // video functions
     function getVideoById(uint256 id) public view returns (Video memory) {
         return videoMappings[id];
     }
@@ -83,6 +81,11 @@ contract DOTT is ERC721URIStorage {
         );
         videoMappings[id].metadata = metadata;
         videoMappings[id].price = price;
+    }
+
+    function deleteVideo(uint256 id, string memory postedVideos) public {
+        userMappings[msg.sender].postedVideos = postedVideos;
+        delete videoMappings[id];
     }
 
     function getVideoOwnerAndPrice(uint256 id)
