@@ -98,7 +98,7 @@ function Home() {
     <div className="Home">
       <Header account={currentAccount} />
       <br />
-      <div className="main-display" style={{ display: "flex", justifyContent: "space around" }}>
+      <div className="main-display" style={{ display: "flex", justifyContent: "space-around" }}>
         {/* <Sidebar /> */}
         <Videos />
       </div>

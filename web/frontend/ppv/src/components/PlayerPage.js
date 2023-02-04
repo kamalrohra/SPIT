@@ -7,7 +7,7 @@ function PlayerPage() {
     <div className="App">
       <Header />
       <br />
-      <div className="main-display" style={{ display: "flex", justifyContent: "space around" }}>
+      <div className="main-display" style={{ display: "flex", justifyContent: "space-around" }}>
         {/* <Sidebar/> */}
         <Player />
       </div>
