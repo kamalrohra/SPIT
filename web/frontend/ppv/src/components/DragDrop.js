@@ -110,14 +110,6 @@ function DragDropFile({ contract }) {
         />
       </div>
 
-<<<<<<< HEAD
-      <input ref={inputRef} type="file" id="input-file-upload" multiple={true} onChange={handleChange} />
-      <label id="label-file-upload" htmlFor="input-file-upload" className={dragActive ? "drag-active" : "" }>
-        {/* <div> */}
-          <p>Drag and drop your file here or</p>
-          <button className="upload-button" onClick={onButtonClick}>Upload a file</button>
-        {/* </div>  */}
-=======
       <br />
       <div>
         <TextField
@@ -155,7 +147,6 @@ function DragDropFile({ contract }) {
             Upload a file
           </button>
         </div>
->>>>>>> 7494d1ee754672a719716cea101f40e09605ac47
       </label>
       {dragActive && (
         <div
@@ -172,16 +163,9 @@ function DragDropFile({ contract }) {
 // app component
 function DragDrop({ contract }) {
   return (
-<<<<<<< HEAD
     <div className="dd" style={{display:"block"}}><h1>Upload Video</h1>
     <div className="page">
       <DragDropFile />
-=======
-    <div className="dd">
-      <h1>Upload Video</h1>
-      <div className="page">
-        <DragDropFile contract={contract} />
->>>>>>> 7494d1ee754672a719716cea101f40e09605ac47
       </div>
     </div>
   );
