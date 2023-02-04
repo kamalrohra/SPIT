@@ -2,6 +2,7 @@ import React from "react";
 import "../styles/Videos.css";
 import Filter from "./Filter";
 import SingleVideo from "./SingleVideo";
+import { Typography } from "@mui/material";
 
 function Videos({ setAccounts, accounts, contract }) {
   return (

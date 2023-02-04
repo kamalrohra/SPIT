@@ -6,7 +6,7 @@ import Player from "./components/Player";
 import PlayerPage from "./components/PlayerPage";
 import Home from "./components/Home";
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
-import Profile from "./components/Profile";
+// import Profile from "./components/Profile";
 import Register from "./components/Register";
 import ChannelDetail from "./components/Channel";
 import Analytics from "./components/Analytics";

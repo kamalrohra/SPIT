@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 import checkWalletIsConnected from "../wallet/IfConnected";
 import MarketplaceAddress from "../contractAddress.json";
 import MarketplaceAbi from "../artifacts/contracts/dMarket.sol/DOTT.json";
-
+import Banner from "./Banner";
 function Home({ contract, setAccounts, accounts }) {
   const [currentAccount, setCurrentAccount] = useState(null);
   const [provider, setProvider] = useState(null);
@@ -81,12 +81,12 @@ function Home({ contract, setAccounts, accounts }) {
     <div className="Home">
       <Header contract={contract} account={currentAccount} />
       <br />
-      <div className="main-display" style={{ display: "flex" }}>
-        <Videos
-          contract={contract}
-          setAccounts={setAccounts}
-          accounts={accounts}
-        />
+      <div style={{marginBottom:"20px"}}>
+      <Banner/>
+      </div>
+      <div className="main-display" style={{ display: "flex", justifyContent: "space-around" }}>
+        {/* <Sidebar /> */}
+        <Videos />
       </div>
       {/* <Player/> */}
     </div>
