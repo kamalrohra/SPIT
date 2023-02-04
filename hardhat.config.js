@@ -38,6 +38,6 @@ module.exports = {
     sources: "./contracts",
     tests: "./test",
     cache: "./cache",
-    artifacts: "./client/src/artifacts",
+    artifacts: "./web/frontend/ppv//src/artifacts",
   },
 };
