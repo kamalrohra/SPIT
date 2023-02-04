@@ -7,7 +7,9 @@ span.title{
     line-height: 700;
 }
 span.channelname {
-    font-size: 13px;
+    font-size: 14px;
+    margin-left: 10px;
+    font: bold;
 }
 .time_options.d-flex {
     width: 100%;
