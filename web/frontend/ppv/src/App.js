@@ -37,23 +37,25 @@ function App() {
   };
 
   const loadContracts = async (signer, block, provider) => {
-    console.log("loaded contracts");
-    const marketplace = new ethers.Contract(
-      MarketplaceAddress.address,
-      MarketplaceAbi.abi,
-      signer
-    );
-    setContract(marketplace);
-
-    setVideos(parseInt((await marketplace.videoCounter())._hex));
-    console.log(marketplace);
-    const data = await marketplace.sayHello();
-    console.log(data);
-    await returnEvents(marketplace, provider);
-    await getVideos(
-      marketplace,
-      parseInt((await marketplace.videoCounter())._hex)
-    );
+    try {
+      console.log("loaded contracts");
+      const marketplace = new ethers.Contract(
+        MarketplaceAddress.address,
+        MarketplaceAbi.abi,
+        signer
+      );
+      setContract(marketplace);
+      console.log("SETTED");
+      setVideos(parseInt((await marketplace.videoCounter())._hex, 16));
+      console.log("SETTED2");
+      console.log(marketplace);
+      const data = await marketplace.sayHello();
+      console.log(data);
+      await returnEvents(marketplace, provider);
+      await getVideos(marketplace, parseInt(await marketplace.videoCounter()));
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   const returnEvents = async (contract, provider) => {
@@ -76,6 +78,7 @@ function App() {
   };
 
   const getVideos = async (contract, videoLength) => {
+    console.log("Getting videos");
     const promises = [];
     console.log(videoLength);
     for (var i = 1; i <= videoLength; i++) {
@@ -83,7 +86,7 @@ function App() {
     }
     Promise.all(promises).then((r) => {
       console.log(r);
-      // console.log(r[0].name);
+      console.log(r);
       setContracts(r);
     });
     // let videos = [];
