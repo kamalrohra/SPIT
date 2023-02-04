@@ -1,6 +1,6 @@
 import React from "react";
 import "../styles/Header.css";
-
+import DropModal from "./DragModal";
 function Header() {
   return (
     <div className="header d-flex align-items-center justify-content-space-between">
@@ -124,22 +124,7 @@ function Header() {
         </div>
       </div>
       <div className="header-rightbar d-flex align-items-center">
-        <div className="create-options">
-          <svg
-            viewBox="0 0 24 24"
-            preserveAspectRatio="xMidYMid meet"
-            focusable="false"
-            class="style-scope yt-icon pointer mxy-15"
-            style={{ width: "25px", height: "25px" }}
-          >
-            <g class="style-scope yt-icon">
-              <path
-                d="M14,13h-3v3H9v-3H6v-2h3V8h2v3h3V13z M17,6H3v12h14v-6.39l4,1.83V8.56l-4,1.83V6 M18,5v3.83L22,7v8l-4-1.83V19H2V5H18L18,5 z"
-                class="style-scope yt-icon"
-              ></path>
-            </g>
-          </svg>
-        </div>
+        <DropModal/>
         <div className="youtube-apps">
           <svg
             viewBox="0 0 24 24"
