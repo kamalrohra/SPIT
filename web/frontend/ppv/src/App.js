@@ -17,14 +17,14 @@ import { useEffect, useState } from "react";
 import MarketplaceAddress from "./contractAddress.json";
 import MarketplaceAbi from "./artifacts/contracts/dMarket.sol/DOTT.json";
 
-
-
 function App() {
   const [currentAccount, setCurrentAccount] = useState(null);
   const [provider, setProvider] = useState(null);
   const [accounts, setAccounts] = useState(null);
   const [contract, setContract] = useState(null);
-  const [purchasesLog, setPurchases] = useState([])
+  const [purchasesLog, setPurchases] = useState([]);
+  const [videos, setVideos] = useState(0);
+  const [contracts, setContracts] = useState([]);
 
   const initWeb3 = async () => {
     console.log("Running web3");
@@ -37,41 +37,77 @@ function App() {
   };
 
   const loadContracts = async (signer, block, provider) => {
-    console.log("loaded contracts");
-    const marketplace = new ethers.Contract(
-      MarketplaceAddress.address,
-      MarketplaceAbi.abi,
-      signer
-    );
-    setContract(marketplace);
-    console.log(marketplace);
-    const data = await marketplace.sayHello();
-    console.log(data);
-    returnEvents(marketplace, provider)
+    try {
+      console.log("loaded contracts");
+      const marketplace = new ethers.Contract(
+        MarketplaceAddress.address,
+        MarketplaceAbi.abi,
+        signer
+      );
+      setContract(marketplace);
+      console.log("SETTED");
+      setVideos(parseInt((await marketplace.videoCounter())._hex, 16));
+      console.log("SETTED2");
+      console.log(marketplace);
+      const data = await marketplace.sayHello();
+      console.log(data);
+      await returnEvents(marketplace, provider);
+      await getVideos(marketplace, parseInt(await marketplace.videoCounter()));
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   const returnEvents = async (contract, provider) => {
     // filtering events
-    var data = contract.filters.Log(null, null, null, null, null)
-    const current_block = await provider.getBlockNumber()
-    const results = await contract.queryFilter(data, current_block - 10000)
+    var data = contract.filters.Log(null, null, null, null, null);
+    const current_block = await provider.getBlockNumber();
+    const results = await contract.queryFilter(data, current_block - 10000);
 
-    console.log(results)
+    console.log(results);
 
-    const purchases = await Promise.all(results.map(async i => {
-      // fetch arguments from each result
-      i = i.args
-      return i
-    }))
-    console.log(purchases)
-    setPurchases(purchases)
+    const purchases = await Promise.all(
+      results.map(async (i) => {
+        // fetch arguments from each result
+        i = i.args;
+        return i;
+      })
+    );
+    console.log(purchases);
+    setPurchases(purchases);
+  };
+
+  const getVideos = async (contract, videoLength) => {
+    console.log("Getting videos");
+    const promises = [];
+    console.log(videoLength);
+    for (var i = 1; i <= videoLength; i++) {
+      promises.push(contract.getVideoById(i));
+    }
+    Promise.all(promises).then((r) => {
+      console.log(r);
+      console.log(r);
+      setContracts(r);
+    });
+    // let videos = [];
+    // console.log(videoLength);
+    // await Promise.all();
+
+    // console.log("Processing");
+    // const data = await contract.getVideoById(i);
+    // const views = parseInt(data.viewCount._hex, 16);
+    // const price = parseInt(data.price._hex, 16);
+    // data.views = views;
+    // data.price = price;
+    // videos.push(data);
+
+    // console.log(videos);
+    // setContracts(videos);
   };
 
   useEffect(() => {
     initWeb3();
   }, []);
-
-
 
   return (
     <Router>
@@ -86,11 +122,23 @@ function App() {
      </ul> */}
         {/* <Home /> */}
         <Routes>
-          <Route exact path="/" element={<Home contract={contract} setAccounts={setAccounts} accounts={accounts} />}></Route>
+          <Route
+            exact
+            path="/"
+            element={
+              <Home
+                contract={contract}
+                setAccounts={setAccounts}
+                accounts={accounts}
+                videos={contracts}
+              />
+            }></Route>
           <Route exact path="/video/:id" element={<PlayerPage />}></Route>
           <Route exact path="/channel" element={<ChannelDetail />}></Route>
-          <Route exact path="/logs" element={<Analytics purchases={purchasesLog} />}></Route>
-
+          <Route
+            exact
+            path="/logs"
+            element={<Analytics purchases={purchasesLog} />}></Route>
         </Routes>
         {/* <Profile/> */}
         {/* <Register/> */}

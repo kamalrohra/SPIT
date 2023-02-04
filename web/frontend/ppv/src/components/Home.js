@@ -7,17 +7,10 @@ import checkWalletIsConnected from "../wallet/IfConnected";
 import MarketplaceAddress from "../contractAddress.json";
 import MarketplaceAbi from "../artifacts/contracts/dMarket.sol/DOTT.json";
 import Banner from "./Banner";
-function Home({ contract, setAccounts, accounts }) {
+function Home({ contract, setAccounts, accounts, videos }) {
   const [currentAccount, setCurrentAccount] = useState(null);
   const [provider, setProvider] = useState(null);
 
-
-
-
-
-
-
-  
   // Sets up a new Ethereum provider and returns an interface for interacting with the smart contract
   // async function initializeProvider() {
   // const {ethereum} =window;
@@ -81,12 +74,19 @@ function Home({ contract, setAccounts, accounts }) {
     <div className="Home">
       <Header contract={contract} account={currentAccount} />
       <br />
-      <div style={{marginBottom:"20px"}}>
-      <Banner/>
+      <div style={{ marginBottom: "20px" }}>
+        <Banner />
       </div>
-      <div className="main-display" style={{ display: "flex", justifyContent: "space-around" }}>
+      <div
+        className="main-display"
+        style={{ display: "flex", justifyContent: "space-around" }}>
         {/* <Sidebar /> */}
-        <Videos />
+        <Videos
+          videos={videos}
+          setAccounts={setAccounts}
+          contract={contract}
+          accounts={accounts}
+        />
       </div>
       {/* <Player/> */}
     </div>

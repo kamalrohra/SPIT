@@ -33,7 +33,7 @@ import "@openzeppelin/contracts/utils/Strings.sol";
 contract DOTT is ERC721URIStorage {
     address payable public owner;
     uint256 private counter = 0;
-    uint256 private videoCounter = 0;
+    uint256 public videoCounter = 0;
 
     mapping(address => User) public userMappings;
     mapping(uint256 => Video) public videoMappings;

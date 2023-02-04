@@ -163,9 +163,10 @@ function DragDropFile({ contract }) {
 // app component
 function DragDrop({ contract }) {
   return (
-    <div className="dd" style={{display:"block"}}><h1>Upload Video</h1>
-    <div className="page">
-      <DragDropFile />
+    <div className="dd">
+      <h1>Upload Video</h1>
+      <div className="page">
+        <DragDropFile contract={contract} />
       </div>
     </div>
   );
