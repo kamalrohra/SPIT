@@ -21,3 +21,4 @@ typechain-types
 cache
 artifacts
 
+/web/frontend/ppv/node_modules
