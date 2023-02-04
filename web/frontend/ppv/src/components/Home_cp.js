@@ -6,11 +6,53 @@ import { useEffect, useState } from "react";
 import checkWalletIsConnected from "../wallet/IfConnected";
 import MarketplaceAddress from "../contractAddress.json";
 import MarketplaceAbi from "../artifacts/contracts/dMarket.sol/DOTT.json";
-import Banner from "./Banner";
-function Home({ contract, setAccounts, accounts, videos }) {
+
+function Home() {
   const [currentAccount, setCurrentAccount] = useState(null);
   const [provider, setProvider] = useState(null);
 
+  const initWeb3 = async () => {
+    console.log("Running web3");
+    const accounts = await window.ethereum.request({
+      method: "eth_requestAccounts",
+    });
+    const provider = new ethers.providers.Web3Provider(window.ethereum);
+    // const provider = new ethers.providers.Web3Provider(window.ethereumm, "any");
+    setProvider(provider);
+    const signer = provider.getSigner();
+    await loadContracts(signer, 0, provider);
+  };
+
+  const loadContracts = async (signer, block, provider) => {
+    console.log("loaded contracts");
+    const marketplace = new ethers.Contract(
+      MarketplaceAddress.address,
+      MarketplaceAbi.abi,
+      signer
+    );
+    console.log(marketplace);
+
+    // filtering events
+    var data = marketplace.filters.Log(null, null, null, null, null);
+    const current_block = await provider.getBlockNumber();
+    const results = await marketplace.queryFilter(data, current_block - 10000);
+
+    console.log(results);
+
+    const purchases = await Promise.all(
+      results.map(async (i) => {
+        // fetch arguments from each result
+        i = i.args;
+        console.log(i);
+        return i;
+      })
+    );
+    console.log(purchases);
+  };
+
+  useEffect(() => {
+    initWeb3();
+  }, []);
   // Sets up a new Ethereum provider and returns an interface for interacting with the smart contract
   // async function initializeProvider() {
   // const {ethereum} =window;
@@ -72,21 +114,13 @@ function Home({ contract, setAccounts, accounts, videos }) {
 
   return (
     <div className="Home">
-      <Header contract={contract} account={currentAccount} />
+      <Header account={currentAccount} />
       <br />
-      <div style={{ marginBottom: "20px" }}>
-        <Banner />
-      </div>
       <div
         className="main-display"
         style={{ display: "flex", justifyContent: "space-around" }}>
         {/* <Sidebar /> */}
-        <Videos
-          videos={videos}
-          setAccounts={setAccounts}
-          contract={contract}
-          accounts={accounts}
-        />
+        <Videos />
       </div>
       {/* <Player/> */}
     </div>

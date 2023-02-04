@@ -34,21 +34,28 @@ function SingleVideo({
       const details = await contract.getVideoOwnerAndPrice(3);
       console.log(details);
       console.log(parseInt(details[1], 16));
-      const provider = new ethers.providers.Web3Provider(window.ethereum);
-      const signer = provider.getSigner();
-      const tx = {
-        from: accounts,
-        to: details[0],
-        value: ethers.utils.parseEther(parseInt(details[1], 16)),
-        nonce: await provider.getTransactionCount(accounts, "latest"),
-        gasLimit: ethers.utils.hexlify(1000000),
-        gasPrice: ethers.utils.hexlify(parseInt(await provider.getGasPrice())),
-      };
-      signer.sendTransaction(tx).then((transaction) => {
-        console.dir(transaction);
-        alert("Send finished!");
-      });
-      console.log(details[0], details[1]);
+      try {
+        const provider = new ethers.providers.Web3Provider(window.ethereum);
+        const signer = provider.getSigner();
+        const tx = {
+          from: accounts,
+          to: details[0],
+          value: ethers.utils.parseEther(parseInt(details[1], 16).toString()),
+          nonce: await provider.getTransactionCount(accounts, "latest"),
+          gasLimit: ethers.utils.hexlify(1000000),
+          gasPrice: ethers.utils.hexlify(
+            parseInt(await provider.getGasPrice())
+          ),
+        };
+        signer.sendTransaction(tx).then((transaction) => {
+          console.dir(transaction);
+          alert("Send finished!");
+        });
+        console.log(details[0], details[1]);
+      } catch (error) {
+        console.log(error);
+      }
+
       // navigate(`/video/${id}`);
     }
 

@@ -1,4 +1,30 @@
 // SPDX-License-Identifier: MIT
+
+/**
+ * DOTT Contract is a platform for creating and managing video content.
+ * It extends the functionality of ERC721URIStorage Contract.
+ *
+ * The contract allows the following functionality:
+ *  - Register a new user
+ *  - Update an existing user
+ *  - Get user information by wallet address
+ *  - Add a new video
+ *  - Update an existing video
+ *  - Delete a video
+ *  - Get video owner and price
+ *  - Update the list of viewed videos for a user
+ *
+ * The contract defines the following data structures:
+ *  - User: Store user information such as username, bio, and videos posted/viewed
+ *  - Video: Store video information such as owner, name, description, view count, link, and price
+ *
+ * The contract also emits events to log video viewing information
+ *
+ * @author Team Techo-sauruses
+ * @version 0.8.3
+ * @see https://github.com/OpenZeppelin/openzeppelin-contracts
+ */
+
 pragma solidity ^0.8.3;
 import "@openzeppelin/contracts/token/ERC721/extensions/ERC721URIStorage.sol";
 import "@openzeppelin/contracts/utils/Strings.sol";
@@ -7,7 +33,7 @@ import "@openzeppelin/contracts/utils/Strings.sol";
 contract DOTT is ERC721URIStorage {
     address payable public owner;
     uint256 private counter = 0;
-    uint256 private videoCounter = 0;
+    uint256 public videoCounter = 0;
 
     mapping(address => User) public userMappings;
     mapping(uint256 => Video) public videoMappings;
