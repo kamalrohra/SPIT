@@ -10,12 +10,12 @@ import MarketplaceAbi from "../artifacts/contracts/dMarket.sol/DOTT.json";
 function Home() {
   const [currentAccount, setCurrentAccount] = useState(null);
   const [provider, setProvider] = useState(null);
+  const [accounts, setAccounts] = useState(null);
+  const [contract, setContract] = useState(null);
 
   const initWeb3 = async () => {
     console.log("Running web3");
-    const accounts = await window.ethereum.request({
-      method: "eth_requestAccounts",
-    });
+
     const provider = new ethers.providers.Web3Provider(window.ethereum);
     // const provider = new ethers.providers.Web3Provider(window.ethereumm, "any");
     setProvider(provider);
@@ -30,23 +30,10 @@ function Home() {
       MarketplaceAbi.abi,
       signer
     );
+    setContract(marketplace);
     console.log(marketplace);
-
-    // filtering events
-    var data = marketplace.filters.Log(null, null, null, null, null)
-    const current_block = await provider.getBlockNumber()
-    const results = await marketplace.queryFilter(data, current_block - 10000)
-
-    console.log(results)
-
-    const purchases = await Promise.all(results.map(async i => {
-      // fetch arguments from each result
-      i = i.args
-      console.log(i)
-      return i
-    }))
-    console.log(purchases)
-
+    const data = await marketplace.sayHello();
+    console.log(data);
   };
 
   useEffect(() => {
@@ -113,11 +100,14 @@ function Home() {
 
   return (
     <div className="Home">
-      <Header account={currentAccount} />
+      <Header contract={contract} account={currentAccount} />
       <br />
-      <div className="main-display" style={{ display: "flex", justifyContent: "space-around" }}>
-        {/* <Sidebar /> */}
-        <Videos />
+      <div className="main-display" style={{ display: "flex" }}>
+        <Videos
+          contract={contract}
+          setAccounts={setAccounts}
+          accounts={accounts}
+        />
       </div>
       {/* <Player/> */}
     </div>
