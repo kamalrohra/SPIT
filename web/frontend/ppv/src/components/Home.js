@@ -10,27 +10,30 @@ import Banner from "./Banner";
 function Home() {
   const [currentAccount, setCurrentAccount] = useState(null);
   const [provider, setProvider] = useState(null);
+  const [accounts, setAccounts] = useState(null);
+  const [contract, setContract] = useState(null);
 
   const initWeb3 = async () => {
     console.log("Running web3");
-    const accounts = await window.ethereum.request({
-      method: "eth_requestAccounts",
-    });
+
     const provider = new ethers.providers.Web3Provider(window.ethereum);
     // const provider = new ethers.providers.Web3Provider(window.ethereumm, "any");
     setProvider(provider);
     const signer = provider.getSigner();
-    await loadContracts(signer, 0);
+    await loadContracts(signer, 0, provider);
   };
 
-  const loadContracts = async (signer, block) => {
+  const loadContracts = async (signer, block, provider) => {
     console.log("loaded contracts");
     const marketplace = new ethers.Contract(
       MarketplaceAddress.address,
       MarketplaceAbi.abi,
       signer
     );
+    setContract(marketplace);
     console.log(marketplace);
+    const data = await marketplace.sayHello();
+    console.log(data);
   };
 
   useEffect(() => {
@@ -97,7 +100,7 @@ function Home() {
 
   return (
     <div className="Home">
-      <Header account={currentAccount} />
+      <Header contract={contract} account={currentAccount} />
       <br />
       <div style={{marginBottom:"20px"}}>
       <Banner/>
