@@ -50,4 +50,4 @@ function Videos() {
         </div>
     )
 }
-export default Videos
+export default Videos;

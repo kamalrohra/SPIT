@@ -2,7 +2,7 @@
     position: sticky;
     display: flex;
     flex-wrap: wrap;
-    height: auto;
+    height: "100%";
     z-index: 100;
     flex: .2;
     background-color: #fff;
