@@ -92,7 +92,7 @@ function Sidebar() {
         </svg>
         <span className="sidebar-text">Youtube Music</span>
       </div>
-<p></p>
+      <p></p>
       <div className="sidebar-items d-flex align-items-center active">
         <svg
           viewBox="0 0 24 25"
