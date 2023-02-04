@@ -15,7 +15,7 @@ function SingleVideo({
   id,
   setAccounts,
   accounts,
-  contract,
+  contract
 }) {
   const navigate = useNavigate();
   const onClick = async (e) => {

@@ -1,3 +1,4 @@
+import { ethers } from "ethers";
 import React from "react";
 import "../styles/Analytics.css";
 
@@ -22,13 +23,15 @@ function Analytics({ purchases }) {
                     <table>
                         <tbody>
                             {purchases.map((elem) => {
+                                console.log(elem.video)
                                 return (
                                     <tr className="row100 body">
-                                        <td className="cell100 column1">{elem.timestamp}</td>
-                                        <td className="cell100 column2">{elem.from}</td>
-                                        <td className="cell100 column3">{elem.to}</td>
-                                        <td className="cell100 column4">{elem.price}</td>
-                                        <td className="cell100 column5">{elem.video}</td>
+
+                                        <td className="cell100 column1">{parseInt(elem?.timestamp?._hex, 16)}</td>
+                                        <td className="cell100 column2">{elem?.from}</td>
+                                        <td className="cell100 column3">{elem?.to}</td>
+                                        <td className="cell100 column4">{parseInt(elem?.price?._hex, 16)}</td>
+                                        <td className="cell100 column5">dvegcdeh</td>
                                     </tr>
                                 )
                             })}

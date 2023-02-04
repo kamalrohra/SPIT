@@ -22,12 +22,13 @@ import MarketplaceAbi from "./artifacts/contracts/dMarket.sol/DOTT.json";
 function App() {
   const [currentAccount, setCurrentAccount] = useState(null);
   const [provider, setProvider] = useState(null);
+  const [accounts, setAccounts] = useState(null);
+  const [contract, setContract] = useState(null);
+  const [purchasesLog, setPurchases] = useState([])
 
   const initWeb3 = async () => {
     console.log("Running web3");
-    const accounts = await window.ethereum.request({
-      method: "eth_requestAccounts",
-    });
+
     const provider = new ethers.providers.Web3Provider(window.ethereum);
     // const provider = new ethers.providers.Web3Provider(window.ethereumm, "any");
     setProvider(provider);
@@ -42,7 +43,11 @@ function App() {
       MarketplaceAbi.abi,
       signer
     );
+    setContract(marketplace);
     console.log(marketplace);
+    const data = await marketplace.sayHello();
+    console.log(data);
+    returnEvents(marketplace, provider)
   };
 
   const returnEvents = async (contract, provider) => {
@@ -59,14 +64,14 @@ function App() {
       return i
     }))
     console.log(purchases)
-    return purchases
+    setPurchases(purchases)
   };
 
-  
-
   useEffect(() => {
-    returnEvents();
+    initWeb3();
   }, []);
+
+
 
   return (
     <Router>
@@ -81,10 +86,10 @@ function App() {
      </ul> */}
         {/* <Home /> */}
         <Routes>
-          <Route exact path="/" element={<Home />}></Route>
+          <Route exact path="/" element={<Home contract={contract} setAccounts={setAccounts} accounts={accounts} />}></Route>
           <Route exact path="/video/:id" element={<PlayerPage />}></Route>
           <Route exact path="/channel" element={<ChannelDetail />}></Route>
-          <Route exact path="/logs" element={<Analytics data={purchases} />}></Route>
+          <Route exact path="/logs" element={<Analytics purchases={purchasesLog} />}></Route>
 
         </Routes>
         {/* <Profile/> */}

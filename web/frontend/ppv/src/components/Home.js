@@ -7,38 +7,17 @@ import checkWalletIsConnected from "../wallet/IfConnected";
 import MarketplaceAddress from "../contractAddress.json";
 import MarketplaceAbi from "../artifacts/contracts/dMarket.sol/DOTT.json";
 
-function Home() {
+function Home({ contract, setAccounts, accounts }) {
   const [currentAccount, setCurrentAccount] = useState(null);
   const [provider, setProvider] = useState(null);
-  const [accounts, setAccounts] = useState(null);
-  const [contract, setContract] = useState(null);
 
-  const initWeb3 = async () => {
-    console.log("Running web3");
 
-    const provider = new ethers.providers.Web3Provider(window.ethereum);
-    // const provider = new ethers.providers.Web3Provider(window.ethereumm, "any");
-    setProvider(provider);
-    const signer = provider.getSigner();
-    await loadContracts(signer, 0, provider);
-  };
 
-  const loadContracts = async (signer, block, provider) => {
-    console.log("loaded contracts");
-    const marketplace = new ethers.Contract(
-      MarketplaceAddress.address,
-      MarketplaceAbi.abi,
-      signer
-    );
-    setContract(marketplace);
-    console.log(marketplace);
-    const data = await marketplace.sayHello();
-    console.log(data);
-  };
 
-  useEffect(() => {
-    initWeb3();
-  }, []);
+
+
+
+  
   // Sets up a new Ethereum provider and returns an interface for interacting with the smart contract
   // async function initializeProvider() {
   // const {ethereum} =window;
