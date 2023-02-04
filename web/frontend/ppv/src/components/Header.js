@@ -5,7 +5,8 @@ function Header() {
   return (
     <div className="header d-flex align-items-center justify-content-space-between">
       <div className="header-left-items d-flex align-items-center mxy-30">
-        <div className="menubar">
+        <br/>   
+        {/* <div className="menubar">
           <svg
             viewBox="0 0 24 24"
             preserveAspectRatio="xMidYMid meet"
@@ -20,15 +21,15 @@ function Header() {
               ></path>
             </g>
           </svg>
-        </div>
+        </div> */}
         <div className="logo">
           <a href="#">
-            <svg
+            {/* <svg
               viewBox="0 0 97 20"
               preserveAspectRatio="xMidYMid meet"
               focusable="false"
               class="style-scope yt-icon poinetr"
-              style={{ width: "75px", height: "40px" }}
+              style={{ width: "75px", height: "40px", marginLeft:"60px" }}
             >
               <g
                 viewBox="0 0 24 24"
@@ -82,13 +83,13 @@ function Header() {
                   ></path>
                 </g>
               </g>
-            </svg>
+            </svg> */}
           </a>
         </div>
       </div>
       <div className="header-middle-items d-flex align-items-center">
         <div className="input-box relative">
-          <input type="text" className="search-box" placeholder="Search" />
+          <input type="text" className="search-box" placeholder="Search" style={{lineHeight:"2rem"}}/>
           <div className="search-box absolute d-flex align-items-center justify-content-center">
             <svg
               viewBox="0 0 24 24"

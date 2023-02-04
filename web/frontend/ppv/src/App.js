@@ -8,12 +8,12 @@ function App() {
     <div className="App">
       <Header/>
       <br/>
-      <div className="main-display" style={{"display" : "flex"}}>
+      {/* <div className="main-display" style={{"display" : "flex"}}>
       <Sidebar/>
        <Videos/>
       </div>
-      <Player/>
-    </div>
+      <Player/> */}
+  </div> 
   );
 }
 
