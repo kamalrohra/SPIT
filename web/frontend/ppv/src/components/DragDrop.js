@@ -55,6 +55,7 @@ function DragDropFile({ contract }) {
     inputRef.current.click();
   };
   const onSubmit = async (e) => {
+    console.log("Submitted")
     const formData = new FormData();
     formData.append("file", files);
     try {

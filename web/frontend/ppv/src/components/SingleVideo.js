@@ -29,7 +29,7 @@ function SingleVideo({
       console.log("these are the accounts");
 
       setAccounts(accounts[0]);
-      // navigate(`/video/${id}`);
+      navigate(`/video/${id}`);
     } else {
       const details = await contract.getVideoOwnerAndPrice(parseInt(id));
       console.log(details);
@@ -58,7 +58,7 @@ function SingleVideo({
         console.log(error);
       }
 
-      // navigate(`/video/${id}`);
+      navigate(`/video/${id}`);
     }
 
     //if payed

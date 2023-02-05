@@ -17,7 +17,7 @@ function Videos({ setAccounts, accounts, contract, videos }) {
               key={index}
               contract={contract}
               accounts={accounts}
-              thumb_img="https://i.ytimg.com/vi/78uSkHH42IU/hq720.jpg?sqp=-oaymwEcCNAFEJQDSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLCSUsgncPb84K_zEOdU_VzC1bkfjA"
+              thumb_img={`https://source.unsplash.com/random/300x20${index}`}
               profile_img="https://yt3.ggpht.com/ytc/AMLnZu9vk_jSZZqpKOw6TohZDkc4e2ekKVYPlcioQjttfQ=s176-c-k-c0x00ffffff-no-rj-mo"
               title={elem.name}
               channel_name={elem.description}
@@ -30,7 +30,7 @@ function Videos({ setAccounts, accounts, contract, videos }) {
           );
         })}
 
-        <SingleVideo
+        {/* <SingleVideo
           contract={contract}
           accounts={accounts}
           thumb_img="https://i.ytimg.com/vi/78uSkHH42IU/hq720.jpg?sqp=-oaymwEcCNAFEJQDSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLCSUsgncPb84K_zEOdU_VzC1bkfjA"
@@ -68,7 +68,7 @@ function Videos({ setAccounts, accounts, contract, videos }) {
           price="0.1"
           id={4}
           setAccounts={setAccounts}
-        />
+        /> */}
       </div>
     </div>
   );
