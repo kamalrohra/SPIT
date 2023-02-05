@@ -23,7 +23,7 @@ function updateUser(string memory username, string memory bio) public
 ```
 ## Retrieving User Information
 The information of a registered user can be retrieved by calling the `getUserByWallet` function and providing the user's wallet address. The function returns a User struct containing the username, bio, and other information.
-```
+```solidity
 function getUserByWallet(address wallet) public view returns (User memory)
 ```
 
