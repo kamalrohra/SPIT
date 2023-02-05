@@ -1,10 +1,12 @@
 
-# DOTT.view (pay-per-view blockchain platform)
+# DOTT.view🎥 (pay-per-view blockchain platform) 
 
 Entertainment, education, and media encounter content distribution and access control issues. Television and movie subscriptions, online streaming services, and e-learning platforms are centralised and dependent on intermediaries like payment processors and content delivery networks. Centralization can cause inefficiency, lack of transparency, excessive prices, and intermediary dependence.  
 In order to address these difficulties, we developed **DOTT.view**, a decentralised OTT platform built on the blockchain system. DOTT.view enables users to provide and access content and services while utilising the security, transparency, and immutability of blockchain technology.
 
-# Documentation for DOTT Contract
+![landing page](https://user-images.githubusercontent.com/55437218/216803412-ecdc8151-da6e-4d48-be5d-846dcf3fbd92.jpg)
+
+# Documentation for DOTT Contract 📝
 
 The DOTT contract is a decentralized video marketplace that allows users to upload and purchase videos. The contract is implemented as an ERC721 token and implements the ERC721URIStorage interface.
 
@@ -80,3 +82,26 @@ The `Log` event is emitted every time a user updates their viewed videos. The ev
 ```solidity
 event Log(uint256 time, address indexed from, address indexed to, string indexed video, uint256 price);
 ```
+
+# Steps for installing and running the project 🪜
+
+## Installing global dependencies 
+```shell
+npm i
+```
+
+## Installing project dependencies
+
+```shell
+cd web/frontend/ppv/
+npm i
+```
+
+## Run the project
+
+```shell
+npm start
+```
+> Note that you're still inside the `ppv/` directory
+
+Made with :heart: by [Ishita Rai](https://github.com/ishi03), [Kamal Rohra](https://github.com/kamalrohra), [Pathik Ghugare](https://github.com/pathikg) and [Swapnil Jha](https://github.com/Swapnil0506)
