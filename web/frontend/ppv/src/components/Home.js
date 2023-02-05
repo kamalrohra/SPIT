@@ -6,35 +6,11 @@ import { useEffect, useState } from "react";
 import checkWalletIsConnected from "../wallet/IfConnected";
 import MarketplaceAddress from "../contractAddress.json";
 import MarketplaceAbi from "../artifacts/contracts/dMarket.sol/DOTT.json";
-function Home() {
+import Banner from "./Banner";
+function Home({ contract, setAccounts, accounts, videos }) {
   const [currentAccount, setCurrentAccount] = useState(null);
   const [provider, setProvider] = useState(null);
 
-  const initWeb3 = async () => {
-    console.log("Running web3");
-    const accounts = await window.ethereum.request({
-      method: "eth_requestAccounts",
-    });
-    const provider = new ethers.providers.Web3Provider(window.ethereum);
-    // const provider = new ethers.providers.Web3Provider(window.ethereumm, "any");
-    setProvider(provider);
-    const signer = provider.getSigner();
-    await loadContracts(signer, 0);
-  };
-
-  const loadContracts = async (signer, block) => {
-    console.log("loaded contracts");
-    const marketplace = new ethers.Contract(
-      MarketplaceAddress.address,
-      MarketplaceAbi.abi,
-      signer
-    );
-    console.log(marketplace);
-  };
-
-  useEffect(() => {
-    initWeb3();
-  }, []);
   // Sets up a new Ethereum provider and returns an interface for interacting with the smart contract
   // async function initializeProvider() {
   // const {ethereum} =window;
@@ -96,11 +72,21 @@ function Home() {
 
   return (
     <div className="Home">
-      <Header account={currentAccount} />
+      <Header contract={contract} account={currentAccount} />
       <br />
-      <div className="main-display" style={{ display: "flex", justifyContent: "space-around" }}>
+      <div style={{ marginBottom: "20px" }}>
+        <Banner />
+      </div>
+      <div
+        className="main-display"
+        style={{ display: "flex", justifyContent: "space-around" }}>
         {/* <Sidebar /> */}
-        <Videos />
+        <Videos
+          videos={videos}
+          setAccounts={setAccounts}
+          contract={contract}
+          accounts={accounts}
+        />
       </div>
       {/* <Player/> */}
     </div>

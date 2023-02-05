@@ -1,6 +1,8 @@
 import React from "react";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import PaidIcon from "@mui/icons-material/Paid";
+import { useNavigate } from "react-router-dom";
+import { ethers } from "ethers";
 
 function SingleVideo({
   thumb_img,
@@ -11,10 +13,55 @@ function SingleVideo({
   timestamps,
   video_duration,
   price,
+  id,
+  setAccounts,
+  accounts,
+  contract,
 }) {
-  const onClick = (e) => {
-    console.log(e);
+  const navigate = useNavigate();
+  const onClick = async (e) => {
+    // console.log(e);
     //if not connected to metamask then connect
+    if (!accounts) {
+      const accounts = await window.ethereum.request({
+        method: "eth_requestAccounts",
+      });
+      console.log("these are the accounts");
+
+      setAccounts(accounts[0]);
+      // navigate(`/video/${id}`);
+    } else {
+      const details = await contract.getVideoOwnerAndPrice(parseInt(id));
+      console.log(details);
+      console.log(parseInt(details[1], 16));
+      try {
+        const provider = new ethers.providers.Web3Provider(window.ethereum);
+        const signer = provider.getSigner();
+        const tx = {
+          from: accounts,
+          to: details[0],
+          value: ethers.utils.parseEther(parseInt(details[1]).toString()),
+          nonce: await provider.getTransactionCount(accounts, "latest"),
+          gasLimit: ethers.utils.hexlify(1000000),
+          gasPrice: ethers.utils.hexlify(
+            parseInt(await provider.getGasPrice())
+          ),
+        };
+        signer.sendTransaction(tx).then((transaction) => {
+          console.dir(transaction);
+          alert("Send finished!");
+          console.log(id)
+          contract.updateViewedVideos("", id)
+        });
+        console.log(details[0], details[1]);
+      } catch (error) {
+        console.log(error);
+      }
+
+      // navigate(`/video/${id}`);
+    }
+
+    //if payed
   };
   return (
     <div className="col-3">
