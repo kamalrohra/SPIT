@@ -9,6 +9,8 @@ import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 // import Profile from "./components/Profile";
 import Register from "./components/Register";
 import ChannelDetail from "./components/Channel";
+import { Landing } from "./components/Landing";
+
 import Analytics from "./components/Analytics";
 
 import { ethers } from "ethers";
@@ -135,6 +137,7 @@ function App() {
             }></Route>
           <Route exact path="/video/:id" element={<PlayerPage contract={contract} video={contracts} />}></Route>
           <Route exact path="/channel" element={<ChannelDetail />}></Route>
+          <Route exact path="/home" element={<Landing />}></Route>
           <Route
             exact
             path="/logs"
