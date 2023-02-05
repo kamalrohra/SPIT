@@ -33,12 +33,12 @@ import "@openzeppelin/contracts/utils/Strings.sol";
 contract DOTT is ERC721URIStorage {
     address payable public owner;
     uint256 private counter = 0;
-    uint256 private videoCounter = 0;
+    uint256 public videoCounter = 0;
 
     mapping(address => User) public userMappings;
     mapping(uint256 => Video) public videoMappings;
 
-    event Log(uint256 time, address indexed from, address indexed to, string indexed video, uint256 price);
+    event Log(uint256 time, address indexed from, address indexed to, string indexed name, uint256 id,string price);
 
     struct User {
         string username;
@@ -54,7 +54,7 @@ contract DOTT is ERC721URIStorage {
         string description;
         uint256 viewCount;
         string link;
-        uint256 price;
+        string price;
     }
 
     function increaseUserCounter() public returns (uint256) {
@@ -92,7 +92,7 @@ contract DOTT is ERC721URIStorage {
         string memory name,
         string memory description,
         string memory link,
-        uint256 price
+        string memory price
     ) public {
         uint256 id = increaseVideoCounter();
         videoMappings[id] = Video(msg.sender, name, description, 0, link, price);
@@ -100,7 +100,7 @@ contract DOTT is ERC721URIStorage {
 
     function updateVideo(
         uint256 id,
-        uint256 price,
+        string memory price,
         string memory name, 
         string memory description
     ) public {
@@ -125,7 +125,7 @@ contract DOTT is ERC721URIStorage {
     function getVideoOwnerAndPrice(uint256 id)
         public
         view
-        returns (address, uint256)
+        returns (address, string memory)
     {
         return (videoMappings[id].owner, videoMappings[id].price);
     }
@@ -134,9 +134,8 @@ contract DOTT is ERC721URIStorage {
     {
         userMappings[msg.sender].viewedVideos = viewedVideos;
         videoMappings[videoId].viewCount++;
-        string memory video_name_id = string.concat(videoMappings[videoId].name, Strings.toString(videoId));
 
-        emit Log(block.timestamp, msg.sender, videoMappings[videoId].owner, video_name_id, videoMappings[videoId].price);
+        emit Log(block.timestamp, msg.sender, videoMappings[videoId].owner, videoMappings[videoId].name, videoId,  videoMappings[videoId].price);
     }
 
     function sayHello() public pure returns (string memory) {
