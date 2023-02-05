@@ -31,7 +31,7 @@ function SingleVideo({
       setAccounts(accounts[0]);
       // navigate(`/video/${id}`);
     } else {
-      const details = await contract.getVideoOwnerAndPrice(3);
+      const details = await contract.getVideoOwnerAndPrice(parseInt(id));
       console.log(details);
       console.log(parseInt(details[1], 16));
       try {
@@ -40,7 +40,7 @@ function SingleVideo({
         const tx = {
           from: accounts,
           to: details[0],
-          value: ethers.utils.parseEther(parseInt(details[1], 16).toString()),
+          value: ethers.utils.parseEther(parseInt(details[1]).toString()),
           nonce: await provider.getTransactionCount(accounts, "latest"),
           gasLimit: ethers.utils.hexlify(1000000),
           gasPrice: ethers.utils.hexlify(
@@ -50,6 +50,8 @@ function SingleVideo({
         signer.sendTransaction(tx).then((transaction) => {
           console.dir(transaction);
           alert("Send finished!");
+          console.log(id)
+          contract.updateViewedVideos("", id)
         });
         console.log(details[0], details[1]);
       } catch (error) {

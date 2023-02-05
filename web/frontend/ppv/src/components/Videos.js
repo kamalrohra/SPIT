@@ -14,6 +14,7 @@ function Videos({ setAccounts, accounts, contract, videos }) {
         {videos.map((elem, index) => {
           return (
             <SingleVideo
+              key={index}
               contract={contract}
               accounts={accounts}
               thumb_img="https://i.ytimg.com/vi/78uSkHH42IU/hq720.jpg?sqp=-oaymwEcCNAFEJQDSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLCSUsgncPb84K_zEOdU_VzC1bkfjA"
@@ -22,7 +23,7 @@ function Videos({ setAccounts, accounts, contract, videos }) {
               channel_name={elem.description}
               video_duration="5:33:29"
               views={parseInt(elem.viewCount._hex, 16)}
-              price={parseInt(elem.price._hex, 16)}
+              price={elem.price}
               id={index + 1}
               setAccounts={setAccounts}
             />

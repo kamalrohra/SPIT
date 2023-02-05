@@ -79,7 +79,7 @@ function DragDropFile({ contract }) {
         titile,
         description,
         ImgHash,
-        parseInt(price)
+        price
       );
       console.log(data);
     } catch (error) {
