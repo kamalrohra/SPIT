@@ -133,7 +133,7 @@ function App() {
                 videos={contracts}
               />
             }></Route>
-          <Route exact path="/video/:id" element={<PlayerPage />}></Route>
+          <Route exact path="/video/:id" element={<PlayerPage contract={contract} video={contracts} />}></Route>
           <Route exact path="/channel" element={<ChannelDetail />}></Route>
           <Route
             exact

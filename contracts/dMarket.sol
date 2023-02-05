@@ -38,7 +38,7 @@ contract DOTT is ERC721URIStorage {
     mapping(address => User) public userMappings;
     mapping(uint256 => Video) public videoMappings;
 
-    event Log(uint256 time, address indexed from, address indexed to, string indexed name, uint256 id,string price);
+    event Log(uint256 time, address from, address to, string name, uint256 id,string price);
 
     struct User {
         string username;
